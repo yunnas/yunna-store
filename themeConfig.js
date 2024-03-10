@@ -1,7 +1,7 @@
-import { breakpointsVuetify } from '@vueuse/core'
-import { VIcon } from 'vuetify/components/VIcon'
 import { defineThemeConfig } from '@core'
 import { Skins } from '@core/enums'
+import { breakpointsVuetify } from '@vueuse/core'
+import { VIcon } from 'vuetify/components/VIcon'
 
 // ❗ Logo SVG must be imported with ?raw suffix
 import logo from '@images/logo.svg?raw'
@@ -12,26 +12,21 @@ export const { themeConfig, layoutConfig } = defineThemeConfig({
     title: 'vuexy',
     logo: h('div', { innerHTML: logo, style: 'line-height:0; color: rgb(var(--v-global-theme-primary))' }),
     contentWidth: ContentWidth.Boxed,
-    contentLayoutNav: AppContentLayoutNav.Vertical,
+    contentLayoutNav: AppContentLayoutNav.Horizontal,
     overlayNavFromBreakpoint: breakpointsVuetify.md + 16,
     i18n: {
       enable: true,
-      defaultLocale: 'en',
+      defaultLocale: 'cn',
       langConfig: [
+        {
+          label: 'Chineese',
+          i18nLang: 'cn',
+          isRTL: false,
+        },
         {
           label: 'English',
           i18nLang: 'en',
           isRTL: false,
-        },
-        {
-          label: 'French',
-          i18nLang: 'fr',
-          isRTL: false,
-        },
-        {
-          label: 'Arabic',
-          i18nLang: 'ar',
-          isRTL: true,
         },
       ],
     },
