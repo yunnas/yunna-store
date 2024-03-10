@@ -15,7 +15,7 @@ export const redirects = [
       if (userRole === 'admin')
         return { name: 'apps-academy-my-course' }
       if (userRole === 'client')
-        return { name: 'access-control' }
+        return { name: 'access-controls' }
       
       return { name: 'login', query: to.query }
     },
