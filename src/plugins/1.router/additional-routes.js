@@ -1,3 +1,4 @@
+//TODO: 路由配置文件
 const emailRouteComponent = () => import('@/pages/apps/email/index.vue')
 
 // 👉 Redirects
@@ -12,7 +13,7 @@ export const redirects = [
       const userData = useCookie('userData')
       const userRole = userData.value?.role
       if (userRole === 'admin')
-        return { name: 'dashboards-crm' }
+        return { name: 'apps-academy-my-course' }
       if (userRole === 'client')
         return { name: 'access-control' }
       
