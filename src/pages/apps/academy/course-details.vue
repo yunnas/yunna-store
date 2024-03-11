@@ -52,7 +52,7 @@ const panelStatus = ref(0)
           >
             <div class="px-2 pt-2">
               <VideoPlayer
-                src="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-576p.mp4"
+                src="https://cdn.plyr.io/"
                 poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
                 controls
                 plays-inline
