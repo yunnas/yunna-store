@@ -1,6 +1,5 @@
 <script setup>
 import { layoutConfig } from '@layouts'
-import { can } from '@layouts/plugins/casl'
 import {
   getComputedNavLinkToProp,
   getDynamicI18nProps,
@@ -22,7 +21,6 @@ const props = defineProps({
 
 <template>
   <li
-    v-if="can(item.action, item.subject)"
     class="nav-link"
     :class="[{
       'sub-item': props.isSubItem,

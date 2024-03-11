@@ -1,10 +1,10 @@
 <script setup>
-import { VideoPlayer } from '@videojs-player/vue'
 import AcademyMyCourses from '@/views/apps/academy/AcademyMyCourses.vue'
 import boyAppAcademy from '@images/illustrations/boy-app-academy.png'
 import girlAppAcademy from '@images/illustrations/girl-app-academy.png'
 import academyCourseIllustration1 from '@images/pages/academy-course-illustration1.png'
 import academyCourseIllustration2 from '@images/pages/academy-course-illustration2.png'
+import { VideoPlayer } from '@videojs-player/vue'
 
 const searchQuery = ref('')
 </script>
@@ -21,16 +21,15 @@ const searchQuery = ref('')
             class="text-h3 text-center text-wrap mx-auto"
             :class="$vuetify.display.mdAndUp ? 'w-75' : 'w-100'"
           >
-            Education, talents, and career
-            opportunities. <span class="text-primary font-weight-bold"> All in one place.</span>
+            <span class="text-primary font-weight-bold">应用镜像商店</span>
           </h3>
           <p class="text-center text-wrap text-body-1 mx-auto mb-0">
-            Grow your skill with the most reliable online courses and certifications in marketing, information technology, programming, and data science.
+            云纳应用镜像市场，热门项目快速部署。
           </p>
           <div class="d-flex justify-center align-center gap-4 flex-wrap">
             <AppTextField
               v-model="searchQuery"
-              placeholder="Find your course"
+              placeholder="搜索应用镜像"
               density="compact"
               style="min-inline-size: 200px;"
             />

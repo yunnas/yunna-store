@@ -25,17 +25,18 @@ const { data: coursesData } = await useApi(createUrl('/apps/academy/courses', {
   },
 }))
 
-const courses = computed(() => coursesData.value.courses)
-const totalCourse = computed(() => coursesData.value.total)
+const courses = computed(() => coursesData.value.courses) // 计算属性，用于获取课程数据
+const totalCourse = computed(() => coursesData.value.total) // 计算属性，用于获取课程总数
 
 watch([
   hideCompleted,
   label,
 ], () => {
-  page.value = 1
+  page.value = 1 // Reset page number when hideCompleted or label changes
 })
 
 const resolveChipColor = tags => {
+  // 根据标签解析芯片颜色的函数
   if (tags === 'Web')
     return 'primary'
   if (tags === 'Art')
@@ -56,7 +57,7 @@ const resolveChipColor = tags => {
       <div class="d-flex justify-space-between align-center flex-wrap gap-4 mb-6">
         <div>
           <h5 class="text-h5">
-            My Courses
+            公共镜像
           </h5>
           <div class="text-body-1">
             Total 6 course you have purchased
@@ -117,6 +118,7 @@ const resolveChipColor = tags => {
                       {{ course.tags }}
                     </VChip>
                     <div class="d-flex">
+                      <!-- 课程评分 -->
                       <span class="text-body-1 font-weight-medium align-center">
                         {{ course.rating }}
                       </span>
@@ -129,6 +131,7 @@ const resolveChipColor = tags => {
                       <span class="text-body-1 text-disabled font-weight-medium">({{ course.ratingCount }})</span>
                     </div>
                   </div>
+                  <!-- 课程标题 -->
                   <h5 class="text-h5 mb-1">
                     <RouterLink
                       :to="{ name: 'apps-academy-course-details' }"
@@ -137,6 +140,7 @@ const resolveChipColor = tags => {
                       {{ course.courseTitle }}
                     </RouterLink>
                   </h5>
+                  <!-- 课程描述 -->
                   <p>
                     {{ course.desc }}
                   </p>
@@ -162,6 +166,7 @@ const resolveChipColor = tags => {
                     />
                     <span class="text-success text-body-1">Completed</span>
                   </div>
+                  <!-- 课程进度条 -->
                   <VProgressLinear
                     :model-value="(course.completedTasks / course.totalTasks) * 100"
                     rounded
@@ -170,6 +175,7 @@ const resolveChipColor = tags => {
                     class="mb-6"
                   />
                   <div class="d-flex flex-wrap gap-4">
+                    <!-- 重新开始按钮 -->
                     <VBtn
                       variant="tonal"
                       color="secondary"
@@ -184,6 +190,7 @@ const resolveChipColor = tags => {
                       </template>
                       Start Over
                     </VBtn>
+                    <!-- 继续按钮 -->
                     <VBtn
                       v-if="course.completedTasks !== course.totalTasks"
                       variant="tonal"
@@ -205,6 +212,7 @@ const resolveChipColor = tags => {
           </template>
         </VRow>
       </div>
+      <!-- 分页组件 -->
       <VPagination
         v-model="page"
         :length="Math.ceil(totalCourse / itemsPerPage)"
@@ -234,10 +242,11 @@ const resolveChipColor = tags => {
   </VCard>
 </template>
 
-<style lang="scss" scoped>
-.course-title{
-  &:not(:hover){
-    color: rgba(var(--v-theme-on-surface), var(--v-text-high-emphasis))
-  }
-}
-</style>
+                      <!-- 样式部分 -->
+                      <style lang="scss" scoped>
+                      .course-title{
+                        &:not(:hover){
+                          color: rgba(var(--v-theme-on-surface), var(--v-text-high-emphasis))
+                        }
+                      }
+                      </style>

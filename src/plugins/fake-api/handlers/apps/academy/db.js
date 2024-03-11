@@ -15,27 +15,28 @@ import tutorImg3 from '@images/pages/app-academy-tutor-3.png'
 import tutorImg4 from '@images/pages/app-academy-tutor-4.png'
 import tutorImg5 from '@images/pages/app-academy-tutor-5.png'
 import tutorImg6 from '@images/pages/app-academy-tutor-6.png'
+import tutorImg7 from '@images/pages/chatgpt-next.png'
 
 export const db = {
   courses: [
     {
-      id: 1,
-      user: 'Lauretta Coie',
-      image: avatar1,
-      tutorImg: tutorImg1,
-      completedTasks: 19,
-      totalTasks: 25,
-      userCount: 18,
-      note: 20,
-      view: 83,
-      time: '17h 34m',
-      logo: 'tabler-brand-angular',
-      color: 'error',
-      courseTitle: 'Basics of Angular',
-      desc: 'Introductory course for Angular and framework basics.Master Angular and build awesome apps.',
-      tags: 'Web',
-      rating: 4.4,
-      ratingCount: 8,
+      id: 1, // 唯一标识符，通常用于数据库中区分不同的记录
+      user: 'Lauretta Coie', // 用户的名字
+      image: avatar1, // 用户的头像图片的链接或者引用
+      tutorImg: tutorImg7, // 导师的头像图片的链接或者引用
+      completedTasks: 19, // 用户已经完成的任务数量
+      totalTasks: 25, // 总任务的数量
+      userCount: 18, // 某种用户的数量，具体含义取决于上下文
+      note: 20, // 笔记的数量
+      view: 83, // 查看的次数
+      time: '17h 34m', // 用户花费的时间或者课程的持续时间
+      logo: 'tabler-brand-angular', // 课程或者平台的logo
+      color: 'error', // 用于前端显示的颜色代码
+      courseTitle: 'ChatGPT-Next-Web', // 课程的标题
+      desc: '一键免费部署你的私人 ChatGPT 网页应用，支持 GPT3, GPT4 & Gemini Pro 模型。', // 课程的描述
+      tags: 'Web', // 课程的标签，例如"Web"
+      rating: 4.6, // 课程的评分
+      ratingCount: 8, // 评分的数量
     },
     {
       id: 2,
