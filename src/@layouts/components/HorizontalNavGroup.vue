@@ -4,7 +4,6 @@ import {
   HorizontalNavLink,
   HorizontalNavPopper,
 } from '@layouts/components'
-import { canViewNavMenuGroup } from '@layouts/plugins/casl'
 import { useLayoutConfigStore } from '@layouts/stores/config'
 import {
   getDynamicI18nProps,
@@ -50,7 +49,6 @@ watch(() => route.path, () => {
 
 <template>
   <HorizontalNavPopper
-    v-if="canViewNavMenuGroup(item)"
     :is-rtl="configStore.isAppRTL"
     class="nav-group"
     tag="li"
@@ -109,8 +107,7 @@ watch(() => route.path, () => {
       z-index: 1;
 
       > div {
-        overflow-x: hidden;
-        overflow-y: auto;
+        overflow: hidden auto;
       }
     }
   }
