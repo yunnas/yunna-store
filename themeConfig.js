@@ -9,7 +9,7 @@ import { AppContentLayoutNav, ContentWidth, FooterType, NavbarType } from '@layo
 
 export const { themeConfig, layoutConfig } = defineThemeConfig({
   app: {
-    title: '云纳',
+    title: 'yunna', // default title 禁止修改
     logo: h('div', { innerHTML: logo, style: 'line-height:0; color: rgb(var(--v-global-theme-primary))' }),
     contentWidth: ContentWidth.Boxed,
     contentLayoutNav: AppContentLayoutNav.Horizontal,
