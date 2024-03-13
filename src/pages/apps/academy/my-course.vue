@@ -182,7 +182,7 @@ const searchQuery = ref('')
             >
               <div class="pa-2">
                 <VideoPlayer
-                  src="https://cdn.plyr.io/"
+                  src="https://www.runoob.com/try/demo_source/movie.mp4"
                   poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
                   controls
                   plays-inline
@@ -211,7 +211,7 @@ const searchQuery = ref('')
             >
               <div class="pa-2">
                 <VideoPlayer
-                  src="https://cdn.plyr.io/4.mp4"
+                  src="https://www.runoob.com/try/demo_source/movie.mp4"
                   poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
                   controls
                   plays-inline
