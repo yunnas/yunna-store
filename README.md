@@ -1,35 +1,34 @@
-# vue
+# 云纳应用商店🚀
 
-This template should help get you started developing with Vue 3 in Vite.
+欢迎来到云纳应用商店——致力于简化和优化 Docker 应用云部署过程的平台🌐。我们提供一站式解决方案，帮助开发者和企业轻松将 Docker 应用部署到云端。利用我们的平台，用户可以享受到从发现精选 Docker 应用到一键部署到云计算平台的无缝体验，同时我们还提供免费云资源以支持您的部署需求。
 
-## Recommended IDE Setup
+## 🌟 特色功能
 
-[VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar) (and disable Vetur).
+- **精选 Docker 应用展示**：一个经过精心挑选的 Docker 应用镜像库，便于用户浏览和选择适合的应用。
+- **一键快速部署**：通过简单的点击操作即可将应用部署到云纳云计算平台及其他主流云平台，部署过程简便快捷。
+- **免费云资源**：为用户提供免费的云资源，以支持 Docker 应用的云端部署，助您节省成本。
+- **社区讨论板块**：建立一个活跃的社区环境，用户可以在此分享经验，参与讨论，共同推动 Docker 应用的成长和发展。
+- **部署热门榜单**：探索最受欢迎的 Docker 应用部署榜单，了解当前的部署趋势和热门应用。
 
-## Type Support for `.vue` Imports in TS
+## ☁️ 一键部署体验
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates.
+云纳应用商店托管于 [Vercel](https://vercel.com)，提供直观的用户界面和简化的操作流程。访问 [store.yunna.net](https://store.yunna.net) 以浏览可用的 Docker 应用，并通过简单的点击实现一键部署，享受便捷的云端部署体验。
 
-However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can run `Volar: Switch TS Plugin on/off` from VS Code command palette.
+## 🤝 如何贡献
 
-## Customize configuration
+我们欢迎并鼓励社区成员贡献 Docker 应用镜像，以丰富云纳应用商店的应用库：
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+1. **准备您的 Docker 应用**：确保您的应用已适配 Docker，并可通过 Docker Compose 或 Dockerfile 部署。
+2. **提交应用至云纳**：请通过 [GitHub Issues](https://github.com/yunnas/yunna-store/issues) 提交您的应用信息，包括应用介绍、Dockerfile 或 Docker Compose 文件的链接等。
+3. **社区评审**：我们的社区将对提交的应用进行审查，以确保它们满足云纳应用商店的质量和标准要求。
 
-## Project Setup
+## 👥 社区与支持
 
-```sh
-npm install
-```
+加入云纳社区，与其他开发者一起交流，共同探讨 Docker 应用的部署和优化。如果您在部署过程中遇到任何问题，或希望提供反馈，欢迎通过以下方式联系我们：
 
-### Compile and Hot-Reload for Development
+- [GitHub Issues](https://github.com/yunnas/yunna-store/issues)
+- [云纳官网](https://yunna.net)
 
-```sh
-npm run dev
-```
+## 📄 许可证
 
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
+云纳应用商店基于 [MIT 许可证](LICENSE) 开源。
