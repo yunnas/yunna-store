@@ -5,7 +5,7 @@ export const redirects = [
   {
     path: '/',
     name: 'index',
-    redirect: { name: 'apps-academy-my-course' },
+    redirect: { name: 'home' },
   },
   {
     path: '/pages/user-profile',
