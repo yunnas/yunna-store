@@ -1,9 +1,9 @@
 <script setup>
-import AcademyAssignmentProgress from '@/views/apps/academy/AcademyAssignmentProgress.vue'
-import AcademyCardPopularInstructors from '@/views/apps/academy/AcademyCardPopularInstructors.vue'
-import AcademyCardTopCourses from '@/views/apps/academy/AcademyCardTopCourses.vue'
-import AcademyCourseTable from '@/views/apps/academy/AcademyCourseTable.vue'
-import AcademyUpcomingWebinar from '@/views/apps/academy/AcademyUpcomingWebinar.vue'
+import AcademyAssignmentProgress from '@/views/apps/mirror/AcademyAssignmentProgress.vue'
+import AcademyCardPopularInstructors from '@/views/apps/mirror/AcademyCardPopularInstructors.vue'
+import AcademyCardTopCourses from '@/views/apps/mirror/AcademyCardTopCourses.vue'
+import AcademyCourseTable from '@/views/apps/mirror/AcademyCourseTable.vue'
+import AcademyUpcomingWebinar from '@/views/apps/mirror/AcademyUpcomingWebinar.vue'
 
 const borderColor = 'rgba(var(--v-border-color), var(--v-border-opacity))'
 
