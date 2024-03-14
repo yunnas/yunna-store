@@ -1,6 +1,5 @@
 <script setup>
 import { layoutConfig } from '@layouts'
-import { can } from '@layouts/plugins/casl'
 import { useLayoutConfigStore } from '@layouts/stores/config'
 import {
   getComputedNavLinkToProp,
@@ -21,7 +20,6 @@ const hideTitleAndBadge = configStore.isVerticalNavMini()
 
 <template>
   <li
-    v-if="can(item.action, item.subject)"
     class="nav-link"
     :class="{ disabled: item.disable }"
   >
