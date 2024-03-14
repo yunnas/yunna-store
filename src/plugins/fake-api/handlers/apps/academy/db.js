@@ -12,6 +12,7 @@ import tutorImg4 from '@images/pages/app-academy-tutor-4.png'
 import tutorImg5 from '@images/pages/app-academy-tutor-5.png'
 import tutorImg6 from '@images/pages/app-academy-tutor-6.png'
 import tutorImg7 from '@images/pages/chatgpt-next.png'
+import tutorImg8 from '@images/pages/wordpress.png'
 
 export const db = {
   courses: [
@@ -37,7 +38,7 @@ export const db = {
     {
       id: 2,
       user: 'Maybelle Zmitrovich',
-      tutorImg: tutorImg2,
+      tutorImg: tutorImg8,
       image: avatar2,
       completedTasks: 50,
       totalTasks: 52,
@@ -47,7 +48,7 @@ export const db = {
       time: '19h 17m',
       logo: 'tabler-color-swatch',
       color: 'warning',
-      desc: 'Learn how to design a beautiful & engaging mobile app with Figma',
+      desc: 'WordPress 是一款广泛使用的开源内容管理系统（CMS），用于创建和管理网站和博客。',
       courseTitle: 'UI/UX Design',
       tags: 'Design',
       rating: 4.9,
