@@ -48,9 +48,9 @@ export const routes = [
     component: () => import('@/pages/apps/logistics/dashboard.vue'),
   },
   {
-    path: '/dashboards/academy',
-    name: 'dashboards-academy',
-    component: () => import('@/pages/apps/academy/dashboard.vue'),
+    path: '/dashboards/mirror',
+    name: 'dashboards-mirror',
+    component: () => import('@/pages/apps/mirror/dashboard.vue'),
   },
   {
     path: '/apps/ecommerce/dashboard',
