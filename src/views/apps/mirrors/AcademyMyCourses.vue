@@ -101,11 +101,13 @@ const resolveChipColor = tags => {
                 flat
                 border
               >
-                <div
-                  class="course-thumbnail"
-                  :style="{ backgroundImage: `url(${course.tutorImg})` }"
-                  @click="() => $router.push({ name: 'apps-academy-course-details' })"
-                />
+                <div class="pa-2">
+                  <VImg
+                    :src="course.tutorImg"
+                    class="cursor-pointer"
+                    @click="() => $router.push({ name: 'apps-academy-course-details' })"
+                  />
+                </div>
                 <VCardText>
                   <div class="d-flex justify-space-between align-center mb-4">
                     <VChip
@@ -246,14 +248,5 @@ const resolveChipColor = tags => {
                         &:not(:hover){
                           color: rgba(var(--v-theme-on-surface), var(--v-text-high-emphasis))
                         }
-                      }
-
-                      .course-thumbnail{
-                        border-radius: 6px;
-                        margin: 8px !important;
-                        background-position: center;
-                        background-size: cover;
-                        block-size: 160px;
-                        cursor: pointer;
                       }
                       </style>
