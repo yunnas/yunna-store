@@ -1,11 +1,9 @@
 <script setup>
-import { TransitionGroup } from 'vue'
 import { layoutConfig } from '@layouts'
 import {
   TransitionExpand,
   VerticalNavLink,
 } from '@layouts/components'
-import { canViewNavMenuGroup } from '@layouts/plugins/casl'
 import { useLayoutConfigStore } from '@layouts/stores/config'
 import { injectionKeyIsVerticalNavHovered } from '@layouts/symbols'
 import {
@@ -13,6 +11,7 @@ import {
   isNavGroupActive,
   openGroups,
 } from '@layouts/utils'
+import { TransitionGroup } from 'vue'
 
 const props = defineProps({
   item: {
@@ -129,7 +128,6 @@ const isMounted = useMounted()
 
 <template>
   <li
-    v-if="canViewNavMenuGroup(item)"
     class="nav-group"
     :class="[
       {
