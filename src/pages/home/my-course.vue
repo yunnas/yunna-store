@@ -1,5 +1,5 @@
 <script setup>
-import AcademyMyCourses from '@/views/apps/academy/AcademyMyCourses.vue'
+import AcademyMyCourses from '@/views/apps/mirror/AcademyMyCourses.vue'
 import boyAppAcademy from '@images/illustrations/boy-app-academy.png'
 import girlAppAcademy from '@images/illustrations/girl-app-academy.png'
 import academyCourseIllustration1 from '@images/pages/academy-course-illustration1.png'
