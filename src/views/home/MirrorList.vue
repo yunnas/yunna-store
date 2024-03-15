@@ -106,6 +106,7 @@ const resolveChipColor = tags => {
                   :style="{ backgroundImage: `url(${course.tutorImg})` }"
                   @click="() => $router.push({ name: 'apps-mirror-mirror-details' })"
                 />
+                <!-- TODO: This fix Style Padding -->
                 <VCardText>
                   <div class="d-flex justify-space-between align-center mb-4">
                     <VChip
@@ -165,29 +166,33 @@ const resolveChipColor = tags => {
                     <span class="text-success text-body-1">Completed</span>
                   </div>
                   <!-- 课程进度条 -->
-                  <VProgressLinear
+                  <!--
+                    <VProgressLinear
                     :model-value="(course.completedTasks / course.totalTasks) * 100"
                     rounded
                     color="primary"
                     height="8"
                     class="mb-6"
-                  />
+                    /> 
+                  -->
                   <div class="d-flex flex-wrap gap-4">
                     <!-- 重新开始按钮 -->
-                    <VBtn
+                    <!--
+                      <VBtn
                       variant="tonal"
                       color="secondary"
                       class="flex-grow-1"
                       :to="{ name: 'apps-mirror-mirror-details' }"
-                    >
+                      >
                       <template #prepend>
-                        <VIcon
-                          icon="tabler-rotate-clockwise-2"
-                          class="flip-in-rtl"
-                        />
+                      <VIcon
+                      icon="tabler-rotate-clockwise-2"
+                      class="flip-in-rtl"
+                      />
                       </template>
                       Start Over
-                    </VBtn>
+                      </VBtn> 
+                    -->
                     <!-- 继续按钮 -->
                     <VBtn
                       v-if="course.completedTasks !== course.totalTasks"
