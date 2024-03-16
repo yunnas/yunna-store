@@ -42,3 +42,4 @@ public/mockServiceWorker.js
 .env*
 !.env.example
 volar.config.js
+.prettierrc

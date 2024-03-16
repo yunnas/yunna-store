@@ -11,42 +11,36 @@ const page = ref(1)
 const sortBy = ref()
 const orderBy = ref()
 const hideCompleted = ref(false)
-const label = ref('All Courses')
+const label = ref("All Courses")
 
-const { data: coursesData } = await useApi(createUrl('/apps/academy/courses', {
-  query: {
-    q: () => props.searchQuery,
-    hideCompleted,
-    label,
-    itemsPerPage,
-    page,
-    sortBy,
-    orderBy,
-  },
-}))
+const { data: coursesData } = await useApi(
+  createUrl("/apps/academy/courses", {
+    query: {
+      q: () => props.searchQuery,
+      hideCompleted,
+      label,
+      itemsPerPage,
+      page,
+      sortBy,
+      orderBy,
+    },
+  }),
+)
 
 const courses = computed(() => coursesData.value.courses) // 计算属性，用于获取课程数据
 const totalCourse = computed(() => coursesData.value.total) // 计算属性，用于获取课程总数
 
-watch([
-  hideCompleted,
-  label,
-], () => {
+watch([hideCompleted, label], () => {
   page.value = 1 // Reset page number when hideCompleted or label changes
 })
 
 const resolveChipColor = tags => {
   // 根据标签解析芯片颜色的函数
-  if (tags === 'Web')
-    return 'primary'
-  if (tags === 'Art')
-    return 'success'
-  if (tags === 'UI/UX')
-    return 'error'
-  if (tags === 'Psychology')
-    return 'warning'
-  if (tags === 'Design')
-    return 'info'
+  if (tags === "Web") return "primary"
+  if (tags === "Art") return "success"
+  if (tags === "UI/UX") return "error"
+  if (tags === "Psychology") return "warning"
+  if (tags === "Design") return "info"
 }
 </script>
 
@@ -76,7 +70,7 @@ const resolveChipColor = tags => {
               { title: 'All Courses', value: 'All Courses' },
             ]"
             density="compact"
-            style="min-inline-size: 250px;"
+            style="min-inline-size: 250px"
           />
           <VSwitch
             v-model="hideCompleted"
@@ -104,7 +98,9 @@ const resolveChipColor = tags => {
                 <div
                   class="course-thumbnail"
                   :style="{ backgroundImage: `url(${course.tutorImg})` }"
-                  @click="() => $router.push({ name: 'apps-mirror-mirror-details' })"
+                  @click="
+                    () => $router.push({ name: 'apps-mirror-mirror-details' })
+                  "
                 />
                 <!-- TODO: This fix Style Padding -->
                 <VCardText>
@@ -140,7 +136,7 @@ const resolveChipColor = tags => {
                     </RouterLink>
                   </h5>
                   <!-- 课程描述 -->
-                  <p>
+                  <p class="mirror-decs">
                     {{ course.desc }}
                   </p>
                   <div
@@ -191,7 +187,7 @@ const resolveChipColor = tags => {
                       />
                       </template>
                       Start Over
-                      </VBtn> 
+                      </VBtn>
                     -->
                     <!-- 继续按钮 -->
                     <VBtn
@@ -245,20 +241,33 @@ const resolveChipColor = tags => {
   </VCard>
 </template>
 
-                      <!-- 样式部分 -->
-                      <style lang="scss" scoped>
-                      .course-title{
-                        &:not(:hover){
-                          color: rgba(var(--v-theme-on-surface), var(--v-text-high-emphasis))
-                        }
-                      }
+<!-- 样式部分 -->
+<style lang="scss" scoped>
+.course-title {
+  &:not(:hover) {
+    color: rgba(var(--v-theme-on-surface), var(--v-text-high-emphasis));
+  }
+}
 
-                      .course-thumbnail{
-                        border-radius: 6px;
-                        margin: 8px !important;
-                        background-position: center;
-                        background-size: cover;
-                        block-size: 160px;
-                        cursor: pointer;
-                      }
-                      </style>
+.course-thumbnail {
+  border-radius: 6px;
+  margin: 8px !important;
+  background-position: center;
+  background-size: cover;
+  block-size: 160px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.5s ease; // 过渡效果
+
+  &:hover {
+    box-shadow: 0 2px 5px 0 rgba(34,41,47,16%),0 2px 10px 0 rgba(34,41,47,12%); // 悬停时的阴影效果
+  }
+}
+
+.mirror-decs{
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  inline-size: 100%; /* 限制宽度 */
+  -webkit-line-clamp: 2; /* 限制在3行内 */
+}
+</style>
