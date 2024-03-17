@@ -11,42 +11,46 @@ const page = ref(1)
 const sortBy = ref()
 const orderBy = ref()
 const hideCompleted = ref(false)
-const label = ref('All Courses')
+const label = ref("All Courses")
 
-const { data: coursesData } = await useApi(createUrl('/apps/academy/courses', {
-  query: {
-    q: () => props.searchQuery,
-    hideCompleted,
-    label,
-    itemsPerPage,
-    page,
-    sortBy,
-    orderBy,
-  },
-}))
+const { data: coursesData } = await useApi(
+  createUrl("/apps/academy/courses", {
+    query: {
+      q: () => props.searchQuery,
+      hideCompleted,
+      label,
+      itemsPerPage,
+      page,
+      sortBy,
+      orderBy,
+    },
+  }),
+)
 
 const courses = computed(() => coursesData.value.courses) // 计算属性，用于获取课程数据
 const totalCourse = computed(() => coursesData.value.total) // 计算属性，用于获取课程总数
 
-watch([
-  hideCompleted,
-  label,
-], () => {
+watch([hideCompleted, label], () => {
   page.value = 1 // Reset page number when hideCompleted or label changes
 })
 
 const resolveChipColor = tags => {
   // 根据标签解析芯片颜色的函数
-  if (tags === 'Web')
-    return 'primary'
-  if (tags === 'Art')
-    return 'success'
-  if (tags === 'UI/UX')
-    return 'error'
-  if (tags === 'Psychology')
-    return 'warning'
-  if (tags === 'Design')
-    return 'info'
+  if (tags === "Web") {
+    return "primary"
+  }
+  if (tags === "Art") {
+    return "success"
+  }
+  if (tags === "UI/UX") {
+    return "error"
+  }
+  if (tags === "Psychology") {
+    return "warning"
+  }
+  if (tags === "Design") {
+    return "info"
+  }
 }
 </script>
 
@@ -76,7 +80,7 @@ const resolveChipColor = tags => {
               { title: 'All Courses', value: 'All Courses' },
             ]"
             density="compact"
-            style="min-inline-size: 250px;"
+            style="min-inline-size: 250px"
           />
           <VSwitch
             v-model="hideCompleted"
@@ -104,8 +108,11 @@ const resolveChipColor = tags => {
                 <div
                   class="course-thumbnail"
                   :style="{ backgroundImage: `url(${course.tutorImg})` }"
-                  @click="() => $router.push({ name: 'apps-mirror-mirror-details' })"
+                  @click="
+                    () => $router.push({ name: 'apps-mirror-mirror-details' })
+                  "
                 />
+                <!-- TODO: This fix Style Padding -->
                 <VCardText>
                   <div class="d-flex justify-space-between align-center mb-4">
                     <VChip
@@ -126,7 +133,9 @@ const resolveChipColor = tags => {
                         class="me-2"
                         size="20"
                       />
-                      <span class="text-body-1 text-disabled font-weight-medium">({{ course.ratingCount }})</span>
+                      <span class="text-body-1 text-disabled font-weight-medium">
+                        ({{ course.ratingCount }})
+                      </span>
                     </div>
                   </div>
                   <!-- 课程标题 -->
@@ -139,7 +148,7 @@ const resolveChipColor = tags => {
                     </RouterLink>
                   </h5>
                   <!-- 课程描述 -->
-                  <p>
+                  <p class="mirror-decs">
                     {{ course.desc }}
                   </p>
                   <div
@@ -151,7 +160,7 @@ const resolveChipColor = tags => {
                       size="20"
                       class="me-1"
                     />
-                    <span class="text-body-1 my-auto"> {{ course.time }}</span>
+                    <span class="text-body-1 my-auto">{{ course.time }}</span>
                   </div>
                   <div
                     v-else
@@ -165,29 +174,33 @@ const resolveChipColor = tags => {
                     <span class="text-success text-body-1">Completed</span>
                   </div>
                   <!-- 课程进度条 -->
-                  <VProgressLinear
+                  <!--
+                    <VProgressLinear
                     :model-value="(course.completedTasks / course.totalTasks) * 100"
                     rounded
                     color="primary"
                     height="8"
                     class="mb-6"
-                  />
+                    /> 
+                  -->
                   <div class="d-flex flex-wrap gap-4">
                     <!-- 重新开始按钮 -->
-                    <VBtn
+                    <!--
+                      <VBtn
                       variant="tonal"
                       color="secondary"
                       class="flex-grow-1"
                       :to="{ name: 'apps-mirror-mirror-details' }"
-                    >
+                      >
                       <template #prepend>
-                        <VIcon
-                          icon="tabler-rotate-clockwise-2"
-                          class="flip-in-rtl"
-                        />
+                      <VIcon
+                      icon="tabler-rotate-clockwise-2"
+                      class="flip-in-rtl"
+                      />
                       </template>
                       Start Over
-                    </VBtn>
+                      </VBtn>
+                    -->
                     <!-- 继续按钮 -->
                     <VBtn
                       v-if="course.completedTasks !== course.totalTasks"
@@ -240,20 +253,34 @@ const resolveChipColor = tags => {
   </VCard>
 </template>
 
-                      <!-- 样式部分 -->
-                      <style lang="scss" scoped>
-                      .course-title{
-                        &:not(:hover){
-                          color: rgba(var(--v-theme-on-surface), var(--v-text-high-emphasis))
-                        }
-                      }
+<!-- 样式部分 -->
+<style lang="scss" scoped>
+.course-title {
+  &:not(:hover) {
+    color: rgba(var(--v-theme-on-surface), var(--v-text-high-emphasis));
+  }
+}
 
-                      .course-thumbnail{
-                        border-radius: 6px;
-                        margin: 8px !important;
-                        background-position: center;
-                        background-size: cover;
-                        block-size: 160px;
-                        cursor: pointer;
-                      }
-                      </style>
+.course-thumbnail {
+  border-radius: 6px;
+  margin: 8px !important;
+  background-position: center;
+  background-size: cover;
+  block-size: 160px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.5s ease; // 过渡效果
+
+  &:hover {
+    box-shadow: 0 2px 5px 0 rgba(34, 41, 47, 16%),
+      0 2px 10px 0 rgba(34, 41, 47, 12%); // 悬停时的阴影效果
+  }
+}
+
+.mirror-decs {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  inline-size: 100%; /* 限制宽度 */
+  -webkit-line-clamp: 2; /* 限制在3行内 */
+}
+</style>

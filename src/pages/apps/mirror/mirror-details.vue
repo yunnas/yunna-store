@@ -1,10 +1,20 @@
 <script setup>
 import { VideoPlayer } from '@videojs-player/vue'
+import { marked } from 'marked'
 import 'video.js/dist/video-js.css'
+import { computed, onMounted, ref } from 'vue'
 
 const { data } = await useApi('/apps/academy/course-details')
 const courseDetails = computed(() => data.value)
 const panelStatus = ref(0)
+
+// README.md 内容
+const markdownContent = ref(`# Hello Markdown\n\nThis is *markdown* content.\n\n- Item 1\n- Item 2`)
+const renderedMarkdown = ref('')
+
+onMounted(() => {
+  renderedMarkdown.value = marked(markdownContent.value)
+})
 </script>
 
 <template>
@@ -133,8 +143,13 @@ const panelStatus = ref(0)
               <h5 class="text-h5 mb-3">
                 Description
               </h5>
+              <!-- <div v-html="courseDetails?.description" /> -->
               <!-- eslint-disable-next-line vue/no-v-html -->
-              <div v-html="courseDetails?.description" />
+              <!-- 插入点：展示 README.md 的内容 -->
+              <div
+                class="markdown-container"
+                v-html="renderedMarkdown"
+              />
               <VDivider class="my-6" />
               <h5 class="text-h5 mb-2">
                 Instructor

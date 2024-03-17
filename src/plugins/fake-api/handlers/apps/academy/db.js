@@ -12,6 +12,7 @@ import tutorImg4 from '@images/pages/app-academy-tutor-4.png'
 import tutorImg5 from '@images/pages/app-academy-tutor-5.png'
 import tutorImg6 from '@images/pages/app-academy-tutor-6.png'
 import tutorImg7 from '@images/pages/chatgpt-next.png'
+import tutorImg9 from '@images/pages/coder-image.png'
 import tutorImg8 from '@images/pages/wordpress.png'
 
 export const db = {
@@ -49,7 +50,7 @@ export const db = {
       logo: 'tabler-color-swatch',
       color: 'warning',
       desc: 'WordPress 是一款广泛使用的开源内容管理系统（CMS），用于创建和管理网站和博客。',
-      courseTitle: 'UI/UX Design',
+      courseTitle: 'WordPress',
       tags: 'Design',
       rating: 4.9,
       ratingCount: 10,
@@ -58,7 +59,7 @@ export const db = {
       id: 3,
       user: 'Gertie Langwade',
       image: avatar2,
-      tutorImg: tutorImg3,
+      tutorImg: tutorImg9,
       completedTasks: 87,
       totalTasks: 100,
       userCount: 19,
@@ -67,8 +68,8 @@ export const db = {
       time: '16h 16m',
       logo: 'tabler-brand-react',
       color: 'info',
-      desc: 'Master React.js: Build dynamic web apps with front-end technology',
-      courseTitle: 'React Native',
+      desc: 'Code Server 是一款强大的开源工具，它将 Visual Studio Code (VS Code) 带入了基于Web的在线环境。它使您可以通过Web浏览器远程访问和使用VS Code的功能，而无需在本地安装VS Code应用程序。',
+      courseTitle: 'Coder',
       tags: 'Web',
       rating: 4.8,
       ratingCount: 9,
