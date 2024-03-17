@@ -9,7 +9,7 @@
     "lint": "eslint . -c .eslintrc.cjs --fix --ext .ts,.js,.cjs,.vue,.tsx,.jsx",
     "build:icons": "tsx src/plugins/iconify/build-icons.js",
     "msw:init": "msw init public/ --save",
-    "postinstall": "npm run build:icons && npm run msw:init"
+    "postinstall": "pnpm run build:icons && pnpm run msw:init"
   },
   "dependencies": {
     "@casl/ability": "^6.7.0",
@@ -33,6 +33,7 @@
     "eslint-import-resolver-custom-alias": "^1.3.2",
     "jwt-decode": "^3.1.2",
     "mapbox-gl": "2.15.0",
+    "marked": "^12.0.1",
     "ofetch": "^1.3.3",
     "pinia": "^2.1.7",
     "prismjs": "^1.29.0",
