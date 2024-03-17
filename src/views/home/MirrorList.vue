@@ -36,11 +36,21 @@ watch([hideCompleted, label], () => {
 
 const resolveChipColor = tags => {
   // 根据标签解析芯片颜色的函数
-  if (tags === "Web") return "primary"
-  if (tags === "Art") return "success"
-  if (tags === "UI/UX") return "error"
-  if (tags === "Psychology") return "warning"
-  if (tags === "Design") return "info"
+  if (tags === "Web") {
+    return "primary"
+  }
+  if (tags === "Art") {
+    return "success"
+  }
+  if (tags === "UI/UX") {
+    return "error"
+  }
+  if (tags === "Psychology") {
+    return "warning"
+  }
+  if (tags === "Design") {
+    return "info"
+  }
 }
 </script>
 
@@ -123,7 +133,9 @@ const resolveChipColor = tags => {
                         class="me-2"
                         size="20"
                       />
-                      <span class="text-body-1 text-disabled font-weight-medium">({{ course.ratingCount }})</span>
+                      <span class="text-body-1 text-disabled font-weight-medium">
+                        ({{ course.ratingCount }})
+                      </span>
                     </div>
                   </div>
                   <!-- 课程标题 -->
@@ -148,7 +160,7 @@ const resolveChipColor = tags => {
                       size="20"
                       class="me-1"
                     />
-                    <span class="text-body-1 my-auto"> {{ course.time }}</span>
+                    <span class="text-body-1 my-auto">{{ course.time }}</span>
                   </div>
                   <div
                     v-else
@@ -259,11 +271,12 @@ const resolveChipColor = tags => {
   transition: border-color 0.3s ease, box-shadow 0.5s ease; // 过渡效果
 
   &:hover {
-    box-shadow: 0 2px 5px 0 rgba(34,41,47,16%),0 2px 10px 0 rgba(34,41,47,12%); // 悬停时的阴影效果
+    box-shadow: 0 2px 5px 0 rgba(34, 41, 47, 16%),
+      0 2px 10px 0 rgba(34, 41, 47, 12%); // 悬停时的阴影效果
   }
 }
 
-.mirror-decs{
+.mirror-decs {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
