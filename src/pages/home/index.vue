@@ -1,7 +1,5 @@
 <script setup>
 import AcademyMyCourses from '@/views/home/MirrorList.vue'
-import boyAppAcademy from '@images/illustrations/boy-app-academy.png'
-import girlAppAcademy from '@images/illustrations/girl-app-academy.png'
 import academyCourseIllustration1 from '@images/pages/academy-course-illustration1.png'
 import academyCourseIllustration2 from '@images/pages/academy-course-illustration2.png'
 import { VideoPlayer } from '@videojs-player/vue'
@@ -55,93 +53,6 @@ const searchQuery = ref('')
     </VCard>
 
     <AcademyMyCourses :search-query="searchQuery" />
-
-    <div class="mb-6">
-      <VRow>
-        <VCol
-          cols="12"
-          md="6"
-        >
-          <VCard
-            flat
-            color="rgba(115, 103, 240, 0.08)"
-          >
-            <VCardText>
-              <div class="d-flex justify-space-between gap-4 flex-column-reverse flex-sm-row">
-                <div class="text-center text-sm-start">
-                  <h5 class="text-h5 text-primary mb-1">
-                    <div class="d-flex justify-space-between gap-4 flex-column-reverse flex-sm-row">
-                      <div class="text-center text-sm-start">
-                        <h5 class="text-h5 text-primary mb-1">
-                          Earn a Certificate
-                        </h5>
-                        <p class="text-body-1 text-high-emphasis mb-6" />
-                      </div>
-                    </div>
-                  </h5>
-                  <p class="text-body-1 text-high-emphasis mb-6">
-                    Get the right professional certificate program for you.
-                  </p>
-                  <VBtn>View Programs</VBtn>
-                </div>
-
-                <div class="align-self-center">
-                  <div class="align-self-center">
-                    <img
-                      :src="boyAppAcademy"
-                      height="127"
-                    >
-                  </div>
-                </div>
-              </div>
-            </VCardText>
-          </VCard>
-        </VCol>
-
-        <VCol
-          cols="12"
-          md="6"
-        >
-          <VCard
-            variant="tonal"
-            flat
-            color="error"
-          >
-            <VCardText>
-              <div class="d-flex flex-column-reverse flex-sm-row gap-4 justify-space-between">
-                <div class="text-center text-sm-start">
-                  <h5 class="text-h5 text-error mb-1">
-                    <div class="d-flex flex-column-reverse flex-sm-row gap-4 justify-space-between">
-                      <div class="text-center text-sm-start">
-                        <h5 class="text-h5 text-error mb-1">
-                          Best Rated Courses
-                        </h5>
-                        <p class="text-body-1 text-high-emphasis text-wrap mb-6" />
-                      </div>
-                    </div>
-                  </h5>
-                  <p class="text-body-1 text-high-emphasis text-wrap mb-6">
-                    Enroll now in the most popular and best rated courses.
-                  </p>
-                  <VBtn color="error">
-                    View Courses
-                  </VBtn>
-                </div>
-
-                <div class="align-self-center">
-                  <div class="align-self-center">
-                    <img
-                      :src="girlAppAcademy"
-                      height="127"
-                    >
-                  </div>
-                </div>
-              </div>
-            </VCardText>
-          </VCard>
-        </VCol>
-      </VRow>
-    </div>
 
     <VCard>
       <VCardText>
