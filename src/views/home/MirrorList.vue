@@ -68,6 +68,7 @@ const resolveChipColor = tags => {
           </div>
         </div>
 
+        <!-- 头部筛选 -->
         <div class="d-flex flex-wrap align-center gap-4">
           <VSelect
             v-model="label"
@@ -94,7 +95,7 @@ const resolveChipColor = tags => {
         <!-- 筛选组件 -->
         <VCol
           cols="12"
-          md="4"
+          md="3"
         >
           <div class="mirror-filtering">
             筛选组件
@@ -103,7 +104,7 @@ const resolveChipColor = tags => {
 
         <VCol
           cols="12"
-          md="8"
+          md="9"
         >
           <div>
             <VRow>
@@ -113,8 +114,9 @@ const resolveChipColor = tags => {
               >
                 <VCol
                   cols="12"
-                  lg="6"
-                  md="12"
+                  sm="6"
+                  md="6"
+                  lg="4"
                 >
                   <VCard
                     flat
@@ -128,7 +130,7 @@ const resolveChipColor = tags => {
                       "
                     />
                     <!-- TODO: This fix Style Padding -->
-                    <VCardText>
+                    <VCardText class="mirror-content">
                       <div class="d-flex justify-space-between align-center mb-4">
                         <VChip
                           variant="tonal"
@@ -285,11 +287,10 @@ const resolveChipColor = tags => {
 
 .course-thumbnail {
   border-radius: 6px;
-  margin: 8px !important;
   background-position: center;
   background-repeat: no-repeat; // 防止背景图片重复
   background-size: cover;
-  block-size: 160px;
+  block-size: 10rem;
   cursor: pointer;
   transition: border-color 0.3s ease, box-shadow 0.5s ease; // 过渡效果
 
@@ -310,5 +311,9 @@ const resolveChipColor = tags => {
 .mirror-filtering{
   position: sticky;
   inset-block-start: 5.25rem;
+}
+
+.mirror-content{
+  padding: .875rem;
 }
 </style>
