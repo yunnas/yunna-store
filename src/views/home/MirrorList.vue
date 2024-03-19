@@ -55,7 +55,7 @@ const resolveChipColor = tags => {
 </script>
 
 <template>
-  <VCard class="mb-6">
+  <VCard class="overflow-visible mb-6">
     <VCardText>
       <!-- 👉 Header -->
       <div class="d-flex justify-space-between align-center flex-wrap gap-4 mb-6">
@@ -68,6 +68,7 @@ const resolveChipColor = tags => {
           </div>
         </div>
 
+        <!-- 头部筛选 -->
         <div class="d-flex flex-wrap align-center gap-4">
           <VSelect
             v-model="label"
@@ -89,140 +90,163 @@ const resolveChipColor = tags => {
         </div>
       </div>
 
-      <!-- 👉 Course List -->
-      <div class="mb-6">
-        <VRow>
-          <template
-            v-for="course in courses"
-            :key="course.id"
-          >
-            <VCol
-              cols="12"
-              md="4"
-              sm="6"
-            >
-              <VCard
-                flat
-                border
+      <!-- 👉 Mirror List -->
+      <VRow class="mb-6">
+        <!-- 筛选组件 -->
+        <VCol
+          cols="12"
+          md="3"
+        >
+          <div class="mirror-filtering">
+            筛选组件
+          </div>
+        </VCol>
+
+        <VCol
+          cols="12"
+          md="9"
+        >
+          <div>
+            <VRow>
+              <template
+                v-for="course in courses"
+                :key="course.id"
               >
-                <div
-                  class="course-thumbnail"
-                  :style="{ backgroundImage: `url(${course.tutorImg})` }"
-                  @click="
-                    () => $router.push({ name: 'apps-mirror-mirror-details' })
-                  "
-                />
-                <!-- TODO: This fix Style Padding -->
-                <VCardText>
-                  <div class="d-flex justify-space-between align-center mb-4">
-                    <VChip
-                      variant="tonal"
-                      :color="resolveChipColor(course.tags)"
-                      label
-                    >
-                      {{ course.tags }}
-                    </VChip>
-                    <div class="d-flex">
-                      <!-- 课程评分 -->
-                      <span class="text-body-1 font-weight-medium align-center">
-                        {{ course.rating }}
-                      </span>
-                      <VIcon
-                        icon="tabler-star-filled"
-                        color="warning"
-                        class="me-2"
-                        size="20"
-                      />
-                      <span class="text-body-1 text-disabled font-weight-medium">
-                        ({{ course.ratingCount }})
-                      </span>
-                    </div>
-                  </div>
-                  <!-- 课程标题 -->
-                  <h5 class="text-h5 mb-1">
-                    <RouterLink
-                      :to="{ name: 'apps-mirror-mirror-details' }"
-                      class="course-title"
-                    >
-                      {{ course.courseTitle }}
-                    </RouterLink>
-                  </h5>
-                  <!-- 课程描述 -->
-                  <p class="mirror-decs">
-                    {{ course.desc }}
-                  </p>
-                  <div
-                    v-if="course.completedTasks !== course.totalTasks"
-                    class="d-flex align-center mb-4"
+                <VCol
+                  cols="12"
+                  sm="6"
+                  md="6"
+                  lg="4"
+                >
+                  <VCard
+                    flat
+                    border
                   >
-                    <VIcon
-                      icon="tabler-clock"
-                      size="20"
-                      class="me-1"
+                    <div
+                      class="course-thumbnail"
+                      :style="{ backgroundImage: `url(${course.tutorImg})` }"
+                      @click="
+                        () => $router.push({ name: 'apps-mirror-mirror-details' })
+                      "
                     />
-                    <span class="text-body-1 my-auto">{{ course.time }}</span>
-                  </div>
-                  <div
-                    v-else
-                    class="mb-2"
-                  >
-                    <VIcon
-                      icon="tabler-checks"
-                      color="success"
-                      class="me-1"
-                    />
-                    <span class="text-success text-body-1">Completed</span>
-                  </div>
-                  <!-- 课程进度条 -->
-                  <!--
-                    <VProgressLinear
-                    :model-value="(course.completedTasks / course.totalTasks) * 100"
-                    rounded
-                    color="primary"
-                    height="8"
-                    class="mb-6"
-                    /> 
-                  -->
-                  <div class="d-flex flex-wrap gap-4">
-                    <!-- 重新开始按钮 -->
-                    <!--
-                      <VBtn
-                      variant="tonal"
-                      color="secondary"
-                      class="flex-grow-1"
-                      :to="{ name: 'apps-mirror-mirror-details' }"
+                    <!-- TODO: This fix Style Padding -->
+                    <VCardText class="mirror-content">
+                      <div class="d-flex justify-space-between align-center mb-4">
+                        <VChip
+                          variant="tonal"
+                          :color="resolveChipColor(course.tags)"
+                          label
+                        >
+                          {{ course.tags }}
+                        </VChip>
+                        <div class="d-flex">
+                          <!-- 课程评分 -->
+                          <VIcon
+                            icon="tabler-cloud-download"
+                            color="warning"
+                            class="me-2"
+                            size="20"
+                          />
+                          <span class="text-body-1 font-weight-medium align-center">
+                            {{ course.rating }}
+                          </span>
+                          <!--
+                            <span class="text-body-1 text-disabled font-weight-medium">
+                            ({{ course.ratingCount }})
+                            </span> 
+                          -->
+                        </div>
+                      </div>
+                      <!-- 课程标题 -->
+                      <h5 class="text-h5 mb-1">
+                        <RouterLink
+                          :to="{ name: 'apps-mirror-mirror-details' }"
+                          class="course-title"
+                        >
+                          {{ course.courseTitle }}
+                        </RouterLink>
+                      </h5>
+                      <!-- 课程描述 -->
+                      <p class="mirror-decs">
+                        {{ course.desc }}
+                      </p>
+                      <div
+                        v-if="course.completedTasks !== course.totalTasks"
+                        class="d-flex align-center mb-4"
                       >
-                      <template #prepend>
-                      <VIcon
-                      icon="tabler-rotate-clockwise-2"
-                      class="flip-in-rtl"
-                      />
-                      </template>
-                      Start Over
-                      </VBtn>
-                    -->
-                    <!-- 继续按钮 -->
-                    <VBtn
-                      v-if="course.completedTasks !== course.totalTasks"
-                      variant="tonal"
-                      class="flex-grow-1"
-                      :to="{ name: 'apps-mirror-mirror-details' }"
-                    >
-                      <template #append>
+                        <!--
+                          <VIcon
+                          icon="tabler-clock"
+                          size="20"
+                          class="me-1"
+                          />
+                          <span class="text-body-1 my-auto">{{ course.time }}</span> 
+                        -->
+                      </div>
+                      <div
+                        v-else
+                        class="mb-2"
+                      >
                         <VIcon
-                          icon="tabler-arrow-right"
-                          class="flip-in-rtl"
+                          icon="tabler-checks"
+                          color="success"
+                          class="me-1"
                         />
-                      </template>
-                      Continue
-                    </VBtn>
-                  </div>
-                </VCardText>
-              </VCard>
-            </VCol>
-          </template>
-        </VRow>
-      </div>
+                        <span class="text-success text-body-1">Completed</span>
+                      </div>
+                      <!-- 课程进度条 -->
+                      <!--
+                        <VProgressLinear
+                        :model-value="(course.completedTasks / course.totalTasks) * 100"
+                        rounded
+                        color="primary"
+                        height="8"
+                        class="mb-6"
+                        /> 
+                      -->
+                      <div class="d-flex flex-wrap gap-4">
+                        <!-- 重新开始按钮 -->
+                        <!--
+                          <VBtn
+                          variant="tonal"
+                          color="secondary"
+                          class="flex-grow-1"
+                          :to="{ name: 'apps-mirror-mirror-details' }"
+                          >
+                          <template #prepend>
+                          <VIcon
+                          icon="tabler-rotate-clockwise-2"
+                          class="flip-in-rtl"
+                          />
+                          </template>
+                          Start Over
+                          </VBtn>
+                        -->
+                        <!-- 继续按钮 -->
+                        <VBtn
+                          v-if="course.completedTasks !== course.totalTasks"
+                          variant="tonal"
+                          class="flex-grow-1"
+                          :to="{ name: 'apps-mirror-mirror-details' }"
+                        >
+                          <template #append>
+                            <VIcon
+                              icon="tabler-arrow-right"
+                              class="flip-in-rtl"
+                            />
+                          </template>
+                          Continue
+                        </VBtn>
+                      </div>
+                    </VCardText>
+                  </VCard>
+                </VCol>
+              </template>
+            </VRow>
+          </div>
+        </VCol>
+      </VRow>
+
       <!-- 分页组件 -->
       <VPagination
         v-model="page"
@@ -235,7 +259,7 @@ const resolveChipColor = tags => {
             v-bind="slotProps"
             :icon="false"
           >
-            Previous
+            上一页
           </VBtn>
         </template>
         <template #next="slotProps">
@@ -245,7 +269,7 @@ const resolveChipColor = tags => {
             v-bind="slotProps"
             :icon="false"
           >
-            Next
+            下一页
           </VBtn>
         </template>
       </VPagination>
@@ -263,10 +287,10 @@ const resolveChipColor = tags => {
 
 .course-thumbnail {
   border-radius: 6px;
-  margin: 8px !important;
   background-position: center;
+  background-repeat: no-repeat; // 防止背景图片重复
   background-size: cover;
-  block-size: 160px;
+  block-size: 10rem;
   cursor: pointer;
   transition: border-color 0.3s ease, box-shadow 0.5s ease; // 过渡效果
 
@@ -282,5 +306,14 @@ const resolveChipColor = tags => {
   -webkit-box-orient: vertical;
   inline-size: 100%; /* 限制宽度 */
   -webkit-line-clamp: 2; /* 限制在3行内 */
+}
+
+.mirror-filtering{
+  position: sticky;
+  inset-block-start: 5.25rem;
+}
+
+.mirror-content{
+  padding: .875rem;
 }
 </style>
