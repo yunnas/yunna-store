@@ -8,24 +8,22 @@ const props = defineProps({
 
 const itemsPerPage = ref(6)
 const page = ref(1)
-const sortBy = ref()
-const orderBy = ref()
+const sortBy = ref('date')
+const orderBy = ref('desc')
 const hideCompleted = ref(false)
 const label = ref("All Courses")
 
-const { data: coursesData } = await useApi(
-  createUrl("/apps/academy/courses", {
-    query: {
-      q: () => props.searchQuery,
-      hideCompleted,
-      label,
-      itemsPerPage,
-      page,
-      sortBy,
-      orderBy,
-    },
-  }),
-)
+const { data: coursesData } = await useApi(createUrl("/apps/academy/courses", {
+  query: {
+    q: () => props.searchQuery,
+    hideCompleted,
+    label,
+    itemsPerPage,
+    page,
+    sortBy,
+    orderBy,
+  },
+}))
 
 const courses = computed(() => coursesData.value.courses) // 计算属性，用于获取课程数据
 const totalCourse = computed(() => coursesData.value.total) // 计算属性，用于获取课程总数
@@ -57,7 +55,6 @@ const resolveChipColor = tags => {
 <template>
   <VCard class="overflow-visible mb-6">
     <VCardText>
-      <!-- 👉 Header -->
       <div class="d-flex justify-space-between align-center flex-wrap gap-4 mb-6">
         <div>
           <h5 class="text-h5">
@@ -68,21 +65,7 @@ const resolveChipColor = tags => {
           </div>
         </div>
 
-        <!-- 头部筛选 -->
         <div class="d-flex flex-wrap align-center gap-4">
-          <VSelect
-            v-model="label"
-            :items="[
-              { title: 'Web', value: 'web' },
-              { title: 'Art', value: 'art' },
-              { title: 'UI/UX', value: 'ui/ux' },
-              { title: 'Psychology', value: 'psychology' },
-              { title: 'Design', value: 'design' },
-              { title: 'All Courses', value: 'All Courses' },
-            ]"
-            density="compact"
-            style="min-inline-size: 250px"
-          />
           <VSwitch
             v-model="hideCompleted"
             label="Hide Completed"
@@ -90,15 +73,39 @@ const resolveChipColor = tags => {
         </div>
       </div>
 
-      <!-- 👉 Mirror List -->
       <VRow class="mb-6">
-        <!-- 筛选组件 -->
         <VCol
           cols="12"
           md="3"
         >
           <div class="mirror-filtering">
-            筛选组件
+            <!-- 使用 VRadioGroup 和 VRadio 替代 VSelect -->
+            <VRadioGroup v-model="label">
+              <VRadio
+                label="Web"
+                value="Web"
+              />
+              <VRadio
+                label="Art"
+                value="Art"
+              />
+              <VRadio
+                label="UI/UX"
+                value="UI/UX"
+              />
+              <VRadio
+                label="Psychology"
+                value="Psychology"
+              />
+              <VRadio
+                label="Design"
+                value="Design"
+              />
+              <VRadio
+                label="All Courses"
+                value="All Courses"
+              />
+            </VRadioGroup>
           </div>
         </VCol>
 
@@ -119,17 +126,17 @@ const resolveChipColor = tags => {
                   lg="4"
                 >
                   <VCard
+                    class="mirror-card"
                     flat
                     border
                   >
                     <div
-                      class="course-thumbnail"
+                      class="mirror-thumbnail"
                       :style="{ backgroundImage: `url(${course.tutorImg})` }"
                       @click="
                         () => $router.push({ name: 'apps-mirror-mirror-details' })
                       "
                     />
-                    <!-- TODO: This fix Style Padding -->
                     <VCardText class="mirror-content">
                       <div class="d-flex justify-space-between align-center mb-4">
                         <VChip
@@ -167,7 +174,12 @@ const resolveChipColor = tags => {
                         </RouterLink>
                       </h5>
                       <!-- 课程描述 -->
-                      <p class="mirror-decs">
+                      <p
+                        class="mirror-decs"
+                        @click="
+                          () => $router.push({ name: 'apps-mirror-mirror-details' })
+                        "
+                      >
                         {{ course.desc }}
                       </p>
                       <div
@@ -235,7 +247,7 @@ const resolveChipColor = tags => {
                               class="flip-in-rtl"
                             />
                           </template>
-                          Continue
+                          部署
                         </VBtn>
                       </div>
                     </VCardText>
@@ -277,6 +289,13 @@ const resolveChipColor = tags => {
   </VCard>
 </template>
 
+<style scoped>
+/* Style adjustments specific to your project */
+.mirror-radio-group {
+  /* Styles for radio group, if needed */
+}
+</style>
+
 <!-- 样式部分 -->
 <style lang="scss" scoped>
 .course-title {
@@ -285,13 +304,7 @@ const resolveChipColor = tags => {
   }
 }
 
-.course-thumbnail {
-  border-radius: 6px;
-  background-position: center;
-  background-repeat: no-repeat; // 防止背景图片重复
-  background-size: cover;
-  block-size: 10rem;
-  cursor: pointer;
+.mirror-card {
   transition: border-color 0.3s ease, box-shadow 0.5s ease; // 过渡效果
 
   &:hover {
@@ -300,17 +313,27 @@ const resolveChipColor = tags => {
   }
 }
 
+.mirror-thumbnail {
+  border-radius: 6px 0 0;
+  background-position: center;
+  background-repeat: no-repeat; // 防止背景图片重复
+  background-size: cover;
+  block-size: 10rem;
+  cursor: pointer;
+}
+
 .mirror-decs {
   display: -webkit-box;
   overflow: hidden;
   -webkit-box-orient: vertical;
+  cursor: pointer;
   inline-size: 100%; /* 限制宽度 */
   -webkit-line-clamp: 2; /* 限制在3行内 */
 }
 
 .mirror-filtering{
   position: sticky;
-  inset-block-start: 5.25rem;
+  inset-block-start: 8.25rem;
 }
 
 .mirror-content{
