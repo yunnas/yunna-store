@@ -191,7 +191,7 @@ const resolveChipColor = tags => {
                           v-if="course.completedTasks !== course.totalTasks"
                           variant="tonal"
                           class="flex-grow-1"
-                          :to="{ name: 'apps-mirror-mirror-details' }"
+                          @click="navigateToCourseDetails(course.id)"
                         >
                           <template #append>
                             <VIcon
