@@ -1,6 +1,11 @@
 <script setup>
-import { VideoPlayer } from '@videojs-player/vue'
+import swiper16 from '@images/banner/banner-16.jpg'
+import swiper17 from '@images/banner/banner-17.jpg'
+import swiper18 from '@images/banner/banner-18.jpg'
+import swiper19 from '@images/banner/banner-19.jpg'
+import swiper20 from '@images/banner/banner-20.jpg'
 import { marked } from 'marked'
+import { register } from 'swiper/element/bundle'
 import 'video.js/dist/video-js.css'
 import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router' // 导入useRoute
@@ -23,6 +28,8 @@ const renderedMarkdown = ref('')
 onMounted(() => {
   renderedMarkdown.value = marked(markdownContent.value)
 })
+
+register()
 </script>
 
 <template>
@@ -38,7 +45,7 @@ onMounted(() => {
             <VCardTitle class="mb-2">
               {{ courseDetails?.title }}
             </VCardTitle>
-            <VCardSubtitle>Prof.<span class="font-weight-medium text-high-emphasis ms-1"> {{ courseDetails?.instructor }}</span></VCardSubtitle>
+            <VCardSubtitle>Dev.<span class="font-weight-medium text-high-emphasis ms-1"> {{ courseDetails?.instructor }}</span></VCardSubtitle>
             <template #append>
               <div class="d-flex gap-2 align-center">
                 <VChip
@@ -68,15 +75,28 @@ onMounted(() => {
             flat
             border
           >
-            <div class="px-2 pt-2">
-              <VideoPlayer
-                src="https://cdn.plyr.io/4.mp4"
-                poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
-                controls
-                plays-inline
-                :height="$vuetify.display.mdAndUp ? 440 : 250"
-                class="w-100 rounded"
-              />
+            <!-- TODO: Swiper -->
+            <div>
+              <swiper-container
+                space-between="30"
+                pagination="true"
+                navigation="true"
+                effect="fade"
+                events-prefix="swiper-"
+              >
+                <swiper-slide
+                  v-for="swiperImg in [
+                    swiper20,
+                    swiper19,
+                    swiper18,
+                    swiper17,
+                    swiper16,
+                  ]"
+                  :key="swiperImg"
+                >
+                  <VImg :src="swiperImg" />
+                </swiper-slide>
+              </swiper-container>
             </div>
             <VCardText>
               <h5 class="text-h5 mb-3">

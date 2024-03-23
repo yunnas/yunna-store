@@ -211,9 +211,9 @@ export const db = {
   courseDetails: [
     {
       id: 1,
-      title: 'UI/UX Basic Fundamentals',
+      title: 'Chat-GPT Next Web',
       about: 'Learn web design in 1 hour with 25+ simple-to-use rules and guidelines — tons of amazing web design resources included!',
-      instructor: 'Devonne Wallbridge',
+      instructor: 'Yunna',
       instructorAvatar: avatar3,
       instructorPosition: 'Web Developer, Designer, and Teacher',
       skillLevel: 'All Level',
