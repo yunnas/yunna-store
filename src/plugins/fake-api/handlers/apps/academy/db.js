@@ -209,6 +209,7 @@ export const db = {
     },
   ],
   courseDetails: {
+    id: 1,
     title: 'UI/UX Basic Fundamentals',
     about: 'Learn web design in 1 hour with 25+ simple-to-use rules and guidelines — tons of amazing web design resources included!',
     instructor: 'Devonne Wallbridge',

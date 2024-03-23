@@ -1,4 +1,8 @@
 <script setup>
+import { computed, ref, watch } from 'vue'
+import { useRouter } from 'vue-router' // 引入 useRouter
+
+// 定义组件的 props
 const props = defineProps({
   searchQuery: {
     type: String,
@@ -6,12 +10,16 @@ const props = defineProps({
   },
 })
 
+// 定义响应式数据
 const itemsPerPage = ref(6)
 const page = ref(1)
 const sortBy = ref('date')
 const orderBy = ref('desc')
 const hideCompleted = ref(false)
 const label = ref("All Courses")
+
+// 使用 useRouter 获取 router 实例
+const router = useRouter()
 
 const { data: coursesData } = await useApi(createUrl("/apps/academy/courses", {
   query: {
@@ -25,32 +33,30 @@ const { data: coursesData } = await useApi(createUrl("/apps/academy/courses", {
   },
 }))
 
-const courses = computed(() => coursesData.value.courses) // 计算属性，用于获取课程数据
-const totalCourse = computed(() => coursesData.value.total) // 计算属性，用于获取课程总数
+// 计算属性，用于从 API 数据中获取课程列表和总课程数
+const courses = computed(() => coursesData.value.courses)
+const totalCourse = computed(() => coursesData.value.total)
 
+// 监听 hideCompleted 和 label 的变化，重置页码
 watch([hideCompleted, label], () => {
-  page.value = 1 // Reset page number when hideCompleted or label changes
+  page.value = 1
 })
 
+// 定义路由跳转函数，接受课程 ID 作为参数
+const navigateToCourseDetails = courseId => {
+  router.push({ name: 'MirrorDetails', params: { id: courseId } })
+}
+
+// 定义一个函数，根据课程标签解析对应的颜色
 const resolveChipColor = tags => {
-  // 根据标签解析芯片颜色的函数
-  if (tags === "Web") {
-    return "primary"
-  }
-  if (tags === "Art") {
-    return "success"
-  }
-  if (tags === "UI/UX") {
-    return "error"
-  }
-  if (tags === "Psychology") {
-    return "warning"
-  }
-  if (tags === "Design") {
-    return "info"
-  }
+  if (tags === "Web") return "primary"
+  if (tags === "Art") return "success"
+  if (tags === "UI/UX") return "error"
+  if (tags === "Psychology") return "warning"
+  if (tags === "Design") return "info"
 }
 </script>
+
 
 <template>
   <VCard class="overflow-visible mb-6">
@@ -61,10 +67,9 @@ const resolveChipColor = tags => {
             公共镜像
           </h5>
           <div class="text-body-1">
-            Total 6 course you have purchased
+            Total 6 courses you have purchased
           </div>
         </div>
-
         <div class="d-flex flex-wrap align-center gap-4">
           <VSwitch
             v-model="hideCompleted"
@@ -72,14 +77,12 @@ const resolveChipColor = tags => {
           />
         </div>
       </div>
-
       <VRow class="mb-6">
         <VCol
           cols="12"
           md="3"
         >
           <div class="mirror-filtering">
-            <!-- 使用 VRadioGroup 和 VRadio 替代 VSelect -->
             <VRadioGroup v-model="label">
               <VRadio
                 label="Web"
@@ -108,7 +111,6 @@ const resolveChipColor = tags => {
             </VRadioGroup>
           </div>
         </VCol>
-
         <VCol
           cols="12"
           md="9"
@@ -133,9 +135,7 @@ const resolveChipColor = tags => {
                     <div
                       class="mirror-thumbnail"
                       :style="{ backgroundImage: `url(${course.tutorImg})` }"
-                      @click="
-                        () => $router.push({ name: 'apps-mirror-mirror-details' })
-                      "
+                      @click="navigateToCourseDetails(course.id)"
                     />
                     <VCardText class="mirror-content">
                       <div class="d-flex justify-space-between align-center mb-4">
@@ -147,54 +147,33 @@ const resolveChipColor = tags => {
                           {{ course.tags }}
                         </VChip>
                         <div class="d-flex">
-                          <!-- 课程评分 -->
                           <VIcon
                             icon="tabler-cloud-download"
                             color="warning"
                             class="me-2"
                             size="20"
                           />
-                          <span class="text-body-1 font-weight-medium align-center">
-                            {{ course.rating }}
-                          </span>
-                          <!--
-                            <span class="text-body-1 text-disabled font-weight-medium">
-                            ({{ course.ratingCount }})
-                            </span> 
-                          -->
+                          <span class="text-body-1 font-weight-medium align-center">{{ course.rating }}</span>
                         </div>
                       </div>
-                      <!-- 课程标题 -->
                       <h5 class="text-h5 mb-1">
                         <RouterLink
-                          :to="{ name: 'apps-mirror-mirror-details' }"
+                          :to="{ name: 'MirrorDetails', params: { id: course.id } }"
                           class="course-title"
                         >
                           {{ course.courseTitle }}
                         </RouterLink>
                       </h5>
-                      <!-- 课程描述 -->
                       <p
                         class="mirror-decs"
-                        @click="
-                          () => $router.push({ name: 'apps-mirror-mirror-details' })
-                        "
+                        @click="navigateToCourseDetails(course.id)"
                       >
                         {{ course.desc }}
                       </p>
                       <div
                         v-if="course.completedTasks !== course.totalTasks"
                         class="d-flex align-center mb-4"
-                      >
-                        <!--
-                          <VIcon
-                          icon="tabler-clock"
-                          size="20"
-                          class="me-1"
-                          />
-                          <span class="text-body-1 my-auto">{{ course.time }}</span> 
-                        -->
-                      </div>
+                      />
                       <div
                         v-else
                         class="mb-2"
@@ -206,35 +185,8 @@ const resolveChipColor = tags => {
                         />
                         <span class="text-success text-body-1">Completed</span>
                       </div>
-                      <!-- 课程进度条 -->
-                      <!--
-                        <VProgressLinear
-                        :model-value="(course.completedTasks / course.totalTasks) * 100"
-                        rounded
-                        color="primary"
-                        height="8"
-                        class="mb-6"
-                        /> 
-                      -->
                       <div class="d-flex flex-wrap gap-4">
                         <!-- 重新开始按钮 -->
-                        <!--
-                          <VBtn
-                          variant="tonal"
-                          color="secondary"
-                          class="flex-grow-1"
-                          :to="{ name: 'apps-mirror-mirror-details' }"
-                          >
-                          <template #prepend>
-                          <VIcon
-                          icon="tabler-rotate-clockwise-2"
-                          class="flip-in-rtl"
-                          />
-                          </template>
-                          Start Over
-                          </VBtn>
-                        -->
-                        <!-- 继续按钮 -->
                         <VBtn
                           v-if="course.completedTasks !== course.totalTasks"
                           variant="tonal"
@@ -258,36 +210,14 @@ const resolveChipColor = tags => {
           </div>
         </VCol>
       </VRow>
-
-      <!-- 分页组件 -->
       <VPagination
         v-model="page"
         :length="Math.ceil(totalCourse / itemsPerPage)"
-      >
-        <template #prev="slotProps">
-          <VBtn
-            variant="tonal"
-            color="default"
-            v-bind="slotProps"
-            :icon="false"
-          >
-            上一页
-          </VBtn>
-        </template>
-        <template #next="slotProps">
-          <VBtn
-            variant="tonal"
-            color="default"
-            v-bind="slotProps"
-            :icon="false"
-          >
-            下一页
-          </VBtn>
-        </template>
-      </VPagination>
+      />
     </VCardText>
   </VCard>
 </template>
+
 
 <style scoped>
 /* Style adjustments specific to your project */
@@ -297,7 +227,11 @@ const resolveChipColor = tags => {
 </style>
 
 <!-- 样式部分 -->
-<style lang="scss" scoped>
+<style scoped>
+.mirror-radio-group {
+  /* Styles for radio group, if needed */
+}
+
 .course-title {
   &:not(:hover) {
     color: rgba(var(--v-theme-on-surface), var(--v-text-high-emphasis));
@@ -305,18 +239,17 @@ const resolveChipColor = tags => {
 }
 
 .mirror-card {
-  transition: border-color 0.3s ease, box-shadow 0.5s ease; // 过渡效果
+  transition: border-color 0.3s ease, box-shadow 0.5s ease;
 
   &:hover {
-    box-shadow: 0 2px 5px 0 rgba(34, 41, 47, 16%),
-      0 2px 10px 0 rgba(34, 41, 47, 12%); // 悬停时的阴影效果
+    box-shadow: 0 2px 5px 0 rgba(34, 41, 47, 16%), 0 2px 10px 0 rgba(34, 41, 47, 12%);
   }
 }
 
 .mirror-thumbnail {
   border-radius: 6px 0 0;
   background-position: center;
-  background-repeat: no-repeat; // 防止背景图片重复
+  background-repeat: no-repeat;
   background-size: cover;
   block-size: 10rem;
   cursor: pointer;
@@ -327,16 +260,16 @@ const resolveChipColor = tags => {
   overflow: hidden;
   -webkit-box-orient: vertical;
   cursor: pointer;
-  inline-size: 100%; /* 限制宽度 */
-  -webkit-line-clamp: 2; /* 限制在3行内 */
+  inline-size: 100%;
+  -webkit-line-clamp: 2;
 }
 
-.mirror-filtering{
+.mirror-filtering {
   position: sticky;
   inset-block-start: 8.25rem;
 }
 
-.mirror-content{
+.mirror-content {
   padding: .875rem;
 }
 </style>

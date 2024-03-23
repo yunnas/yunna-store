@@ -68,8 +68,20 @@ export const handlerAppsAcademy = [
     }))
   }),
 
-  // 处理获取课程详情的请求
-  rest.get(('/api/apps/academy/course-details'), (req, res, ctx) => {
-    return res(ctx.status(200), ctx.json(db.courseDetails))
+  // 新增处理器：根据ID获取课程详情
+  rest.get('/api/apps/academy/course-details/:id', (req, res, ctx) => {
+    // 从请求URL中获取课程ID
+    const { id } = req.params
+
+    // 查找对应ID的课程详情
+    const courseDetail = db.courses.find(course => course.id.toString() === id)
+
+    if (courseDetail) {
+      // 如果找到了课程，返回课程详情
+      return res(ctx.status(200), ctx.json(courseDetail))
+    } else {
+      // 如果没找到课程，返回404
+      return res(ctx.status(404), ctx.json({ message: 'Course not found' }))
+    }
   }),
 ]

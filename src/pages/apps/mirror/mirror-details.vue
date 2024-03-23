@@ -3,12 +3,20 @@ import { VideoPlayer } from '@videojs-player/vue'
 import { marked } from 'marked'
 import 'video.js/dist/video-js.css'
 import { computed, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router' // 导入useRoute
 
-const { data } = await useApi('/apps/academy/course-details')
+// 获取路由参数（课程ID）
+const route = useRoute()
+const courseId = route.params.id
+
+// 修改这里以根据课程ID调用API
+// 假设 useApi 能够处理带有ID的请求
+const { data } = await useApi(`/apps/academy/course-details/${courseId}`)
 const courseDetails = computed(() => data.value)
+
 const panelStatus = ref(0)
 
-// README.md 内容
+// README.md 内容，这部分可以保持不变
 const markdownContent = ref(`# Hello Markdown\n\nThis is *markdown* content.\n\n- Item 1\n- Item 2`)
 const renderedMarkdown = ref('')
 
