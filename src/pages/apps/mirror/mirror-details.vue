@@ -1,20 +1,35 @@
 <script setup>
-import { VideoPlayer } from '@videojs-player/vue'
+import swiper16 from '@images/banner/banner-16.jpg'
+import swiper17 from '@images/banner/banner-17.jpg'
+import swiper18 from '@images/banner/banner-18.jpg'
+import swiper19 from '@images/banner/banner-19.jpg'
+import swiper20 from '@images/banner/banner-20.jpg'
 import { marked } from 'marked'
+import { register } from 'swiper/element/bundle'
 import 'video.js/dist/video-js.css'
 import { computed, onMounted, ref } from 'vue'
+import { useRoute } from 'vue-router' // 导入useRoute
 
-const { data } = await useApi('/apps/academy/course-details')
+// 获取路由参数（课程ID）
+const route = useRoute()
+const courseId = route.params.id
+
+// 修改这里以根据课程ID调用API
+// 假设 useApi 能够处理带有ID的请求
+const { data } = await useApi(`/apps/academy/course-details/${courseId}`)
 const courseDetails = computed(() => data.value)
+
 const panelStatus = ref(0)
 
-// README.md 内容
+// README.md 内容，这部分可以保持不变
 const markdownContent = ref(`# Hello Markdown\n\nThis is *markdown* content.\n\n- Item 1\n- Item 2`)
 const renderedMarkdown = ref('')
 
 onMounted(() => {
   renderedMarkdown.value = marked(markdownContent.value)
 })
+
+register()
 </script>
 
 <template>
@@ -30,7 +45,7 @@ onMounted(() => {
             <VCardTitle class="mb-2">
               {{ courseDetails?.title }}
             </VCardTitle>
-            <VCardSubtitle>Prof.<span class="font-weight-medium text-high-emphasis ms-1"> {{ courseDetails?.instructor }}</span></VCardSubtitle>
+            <VCardSubtitle>Dev.<span class="font-weight-medium text-high-emphasis ms-1"> {{ courseDetails?.instructor }}</span></VCardSubtitle>
             <template #append>
               <div class="d-flex gap-2 align-center">
                 <VChip
@@ -60,15 +75,28 @@ onMounted(() => {
             flat
             border
           >
-            <div class="px-2 pt-2">
-              <VideoPlayer
-                src="https://cdn.plyr.io/4.mp4"
-                poster="https://cdn.plyr.io/static/demo/View_From_A_Blue_Moon_Trailer-HD.jpg"
-                controls
-                plays-inline
-                :height="$vuetify.display.mdAndUp ? 440 : 250"
-                class="w-100 rounded"
-              />
+            <!-- TODO: Swiper -->
+            <div>
+              <swiper-container
+                space-between="30"
+                pagination="true"
+                navigation="true"
+                effect="fade"
+                events-prefix="swiper-"
+              >
+                <swiper-slide
+                  v-for="swiperImg in [
+                    swiper20,
+                    swiper19,
+                    swiper18,
+                    swiper17,
+                    swiper16,
+                  ]"
+                  :key="swiperImg"
+                >
+                  <VImg :src="swiperImg" />
+                </swiper-slide>
+              </swiper-container>
             </div>
             <VCardText>
               <h5 class="text-h5 mb-3">

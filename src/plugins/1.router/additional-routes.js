@@ -20,6 +20,14 @@ export const redirects = [
 ]
 
 export const routes = [
+  {
+    path: '/apps/mirror/mirror-details/:id',
+    name: 'MirrorDetails',
+    component: () => import('@/pages/apps/mirror/mirror-details.vue'),
+
+    // 可以添加额外的meta信息，如果需要的话
+  },
+
   // Email filter
   {
     path: '/apps/email/filter/:filter',
